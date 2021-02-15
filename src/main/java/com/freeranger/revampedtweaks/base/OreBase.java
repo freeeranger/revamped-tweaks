@@ -34,28 +34,17 @@ public class OreBase extends Block {
 
     public Item getItemDropped(IBlockState state, Random rand, int fortune)
     {
-        if (this == ModBlocks.DEEP_COAL_ORE)
-        {
+        if (this == ModBlocks.DEEP_COAL_ORE) {
             return Items.COAL;
-        }
-        else if (this == ModBlocks.DEEP_DIAMOND_ORE)
-        {
+        } else if (this == ModBlocks.DEEP_DIAMOND_ORE) {
             return Items.DIAMOND;
-        }
-        else if (this == ModBlocks.DEEP_LAPIS_ORE)
-        {
+        } else if (this == ModBlocks.DEEP_LAPIS_ORE) {
             return Items.DYE;
-        }
-        else if (this == ModBlocks.DEEP_EMERALD_ORE)
-        {
+        } else if (this == ModBlocks.DEEP_EMERALD_ORE) {
             return Items.EMERALD;
-        }
-        else if(this == ModBlocks.DEEP_NATURAL_COPPER_ORE)
-        {
+        } else if(this == ModBlocks.DEEP_NATURAL_COPPER_ORE) {
             return OreSetup.nuggetCopper;
-        }
-        else
-        {
+        } else {
             return Item.getItemFromBlock(this);
         }
     }
@@ -79,63 +68,46 @@ public class OreBase extends Block {
 
     public int quantityDroppedWithBonus(int fortune, Random random)
     {
-        if (fortune > 0 && Item.getItemFromBlock(this) != this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune))
-        {
+        if (fortune > 0 && Item.getItemFromBlock(this) !=
+                this.getItemDropped(this.getBlockState().getValidStates().iterator().next(), random, fortune)) {
             int i = random.nextInt(fortune + 2) - 1;
 
-            if (i < 0)
-            {
-                i = 0;
-            }
+            if (i < 0) i = 0;
+
             return this.quantityDropped(random) * (i + 1);
-        }
-        else
-        {
+        } else {
             return this.quantityDropped(random);
         }
     }
 
-    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune)
-    {
+    public void dropBlockAsItemWithChance(World worldIn, BlockPos pos, IBlockState state, float chance, int fortune) {
         super.dropBlockAsItemWithChance(worldIn, pos, state, chance, fortune);
     }
     @Override
-    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune)
-    {
+    public int getExpDrop(IBlockState state, net.minecraft.world.IBlockAccess world, BlockPos pos, int fortune) {
         Random rand = world instanceof World ? ((World)world).rand : new Random();
-        if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this))
-        {
+        if (this.getItemDropped(state, rand, fortune) != Item.getItemFromBlock(this)) {
             int i = 0;
 
-            if (this == ModBlocks.DEEP_COAL_ORE || this == ModBlocks.DEEP_NATURAL_COPPER_ORE)
-            {
+            if (this == ModBlocks.DEEP_COAL_ORE || this == ModBlocks.DEEP_NATURAL_COPPER_ORE) {
                 i = MathHelper.getInt(rand, 0, 2);
-            }
-            else if (this == ModBlocks.DEEP_DIAMOND_ORE)
-            {
+            } else if (this == ModBlocks.DEEP_DIAMOND_ORE) {
                 i = MathHelper.getInt(rand, 3, 7);
-            }
-            else if (this == ModBlocks.DEEP_EMERALD_ORE)
-            {
+            } else if (this == ModBlocks.DEEP_EMERALD_ORE) {
                 i = MathHelper.getInt(rand, 3, 7);
-            }
-            else if (this == ModBlocks.DEEP_LAPIS_ORE)
-            {
+            } else if (this == ModBlocks.DEEP_LAPIS_ORE) {
                 i = MathHelper.getInt(rand, 2, 5);
             }
-
             return i;
         }
         return 0;
     }
 
-    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state)
-    {
+    public ItemStack getItem(World worldIn, BlockPos pos, IBlockState state) {
         return new ItemStack(this);
     }
 
-    public int damageDropped(IBlockState state)
-    {
+    public int damageDropped(IBlockState state) {
         return this == ModBlocks.DEEP_LAPIS_ORE ? EnumDyeColor.BLUE.getDyeDamage() : 0;
     }
 }
