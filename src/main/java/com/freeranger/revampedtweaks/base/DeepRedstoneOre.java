@@ -34,7 +34,7 @@ public class DeepRedstoneOre extends Block {
 
         setUnlocalizedName(name);
         setRegistryName(name);
-        setHarvestLevel("pickaxe", 3);
+        setHarvestLevel("pickaxe", 2);
         setHardness(3f);
         setResistance(3f);
 
