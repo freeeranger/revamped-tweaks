@@ -25,7 +25,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 @Mod(modid = RevampedTweaks.MODID, name = RevampedTweaks.NAME, version = RevampedTweaks.VERSION,
-        acceptedMinecraftVersions = RevampedTweaks.MC_VERSION, useMetadata = true, dependencies = "required-after:crossroads; required-after:jaopca;")
+        acceptedMinecraftVersions = RevampedTweaks.MC_VERSION, useMetadata = true,
+        dependencies = "required-after:crossroads; required-after:jaopca;")
 public class RevampedTweaks {
     public static final String MODID = "revampedtweaks";
     public static final String NAME = "Revamped Tweaks";
@@ -43,12 +44,6 @@ public class RevampedTweaks {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        LOGGER.info(RevampedTweaks.NAME + " has been initialized! Since this mod is part of a modpack it has a LOT of dependencies.");
-        if(Loader.isModLoaded("crossroads")){
-            LOGGER.info("Dependency crossroads has been initialized.");
-        }else{
-            LOGGER.error("Dependency crossroads has not been initialized.");
-        }
         RegistrationHandler.initRegistries();
     }
 
@@ -69,6 +64,14 @@ public class RevampedTweaks {
 
             ModCrafting.toRegisterOreDict.add(Pair.of(ModBlocks.DEEP_COPPER_ORE, new String[] {"oreCopper"}));
             OreDictionary.registerOre("oreCopper", ModBlocks.DEEP_COPPER_ORE);
+            OreDictionary.registerOre("oreCoal", ModBlocks.DEEP_COAL_ORE);
+            OreDictionary.registerOre("oreDiamond", ModBlocks.DEEP_DIAMOND_ORE);
+            OreDictionary.registerOre("oreLapis", ModBlocks.DEEP_LAPIS_ORE);
+            OreDictionary.registerOre("oreEmerald", ModBlocks.DEEP_EMERALD_ORE);
+            OreDictionary.registerOre("oreIron", ModBlocks.DEEP_IRON_ORE);
+            OreDictionary.registerOre("oreGold", ModBlocks.DEEP_GOLD_ORE);
+            OreDictionary.registerOre("oreRedstone", ModBlocks.DEEP_REDSTONE_ORE);
+
         }
 
         @SubscribeEvent
